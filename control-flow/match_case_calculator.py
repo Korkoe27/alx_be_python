@@ -1,10 +1,19 @@
-weather = input("What's the weather like today? (sunny/rainy/cold): ")
-
-if weather == "sunny":
-    print("Wear a t-shirt and sunglasses.")
-elif weather == "rainy":
-    print("Don't forget your umbrella and a raincoat.")
-elif weather == "cold":
-    print("Make sure to wear a warm coat and a scarf.")
-else:
-    print("Sorry, I don't have recommendations for this weather.")
+num1 = int(input("Enter the first number:"))
+num2 = int(input("Enter the second number:"))
+operation = input("Choose the operation (+, -, *, /):")
+match operation :
+    case "+" :
+        result = num1 + num2
+        print("The result is", result)
+    case "-" :
+        result = num1 - num2
+        print("The result is", result)
+    case "*" :
+        result = num1 * num2
+        print("The result is", result)
+    case "/" :
+        if num2 == 0 :
+            print ("Cannot divide by zero.")
+        else : 
+            result = num1 / num2 
+            print("The result is", result)
