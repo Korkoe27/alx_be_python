@@ -1,53 +1,37 @@
 FAHRENHEIT_TO_CELSIUS_FACTOR = 5 / 9
 CELSIUS_TO_FAHRENHEIT_FACTOR = 9 / 5
 
-def convert_to_celsius(fahrenheit):
-    """
-    Convert temperature from Fahrenheit to Celsius using global conversion factor.
-    
-    Args:
-        fahrenheit (float): Temperature in Fahrenheit
-        
-    Returns:
-        float: Temperature converted to Celsius
-    """
+
+def convert_to_celsius(fahrenheit: float) -> float:
+    """Convert Fahrenheit to Celsius using the global factor."""
     return (fahrenheit - 32) * FAHRENHEIT_TO_CELSIUS_FACTOR
 
-def convert_to_fahrenheit(celsius):
-    """
-    Convert temperature from Celsius to Fahrenheit using global conversion factor.
-    
-    Args:
-        celsius (float): Temperature in Celsius
-        
-    Returns:
-        float: Temperature converted to Fahrenheit
-    """
+
+def convert_to_fahrenheit(celsius: float) -> float:
+    """Convert Celsius to Fahrenheit using the global factor."""
     return (celsius * CELSIUS_TO_FAHRENHEIT_FACTOR) + 32
 
-def main():
-    """
-    Main function to handle user interaction and temperature conversion.
-    """
+
+def main() -> None:
+    # Get temperature input and validate as numeric
+    temp_raw = input("Enter the temperature to convert: ").strip()
     try:
-        # Get temperature input from user
-        temperature = float(input("Enter the temperature to convert: "))
-        
-        # Get unit input from user
-        unit = input("Is this temperature in Celsius or Fahrenheit? (C/F): ").strip().upper()
-        
-        # Perform conversion based on unit
-        if unit == 'F':
-            converted_temp = convert_to_celsius(temperature)
-            print(f"{temperature}°F is {converted_temp}°C")
-        elif unit == 'C':
-            converted_temp = convert_to_fahrenheit(temperature)
-            print(f"{temperature}°C is {converted_temp}°F")
-        else:
-            print("Invalid unit. Please enter 'C' for Celsius or 'F' for Fahrenheit.")
-            
+        temperature = float(temp_raw)
     except ValueError:
-        print("Invalid temperature. Please enter a numeric value.")
+        # Required behavior: raise, not print
+        raise ValueError("Invalid temperature. Please enter a numeric value.")
+
+    # Get and validate unit
+    unit = input("Is this temperature in Celsius or Fahrenheit? (C/F): ").strip().upper()
+    if unit == "F":
+        converted = convert_to_celsius(temperature)
+        print(f"{temperature}°F is {converted}°C")
+    elif unit == "C":
+        converted = convert_to_fahrenheit(temperature)
+        print(f"{temperature}°C is {converted}°F")
+    else:
+        raise ValueError("Invalid unit. Please enter 'C' for Celsius or 'F' for Fahrenheit.")
+
 
 if __name__ == "__main__":
     main()
