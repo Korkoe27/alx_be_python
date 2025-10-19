@@ -1,0 +1,43 @@
+-- Create the database
+CREATE DATABASE IF NOT EXISTS alx_book_store DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+-- Use the database
+USE `alx_book_store`;
+--Create Author's Table
+CREATE TABLE IF NOT EXISTS Authors (
+    author_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    author_name VARCHAR(255)
+);
+-- Create Authors table
+CREATE TABLE IF NOT EXISTS `Books` (
+    `book_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `title` VARCHAR(130) NOT NULL,
+    `author_id` INT UNSIGNED NOT NULL,
+    `price` DOUBLE,
+    `publication_date` DATE,
+    FOREIGN KEY (author_id) REFERENCES Authors(author_id) ON DELETE CASCADE ON UPDATE CASCADE,
+);
+--Create Customer's Table
+CREATE TABLE IF NOT EXISTS `Customers` (
+    customer_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    customer_name VARCHAR(215),
+    email VARCHAR(215),
+    address TEXT
+);
+--Create Orders Table
+CREATE TABLE IF NOT EXISTS `Orders` (
+    order_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    customer_id INT UNSIGNED NOT NULL,
+    order_date DATE,
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id) ON DELETE CASCADE ON UPDATE CASCADE,
+);
+--Create Order Deatails Table
+CREATE TABLE IF NOT EXISTS `Order_Details` (
+    orderdetailid INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    order_id INT UNSIGNED NOT NULL,
+    book_id INT UNSIGNED NOT NULL,
+    quantity DOUBLE,
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id),
+    ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (book_id) REFERENCES Books(book_id) ON DELETE CASCADE ON UPDATE CASCADE,
+);
